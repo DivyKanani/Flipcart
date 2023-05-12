@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Button } from 'react-native';
 import  Toast from 'react-native-toast-message';
 import { verifyUser, addUser} from '../DBA/DBAdapter';
 import { useNavigation } from '@react-navigation/native';
+import { GlobalContext } from '../App';
+
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,7 +13,7 @@ const Login = () => {
   const [email  , setEmail] = useState('');
 
   const navigation = useNavigation();
-
+  const {loginUser} = useContext(GlobalContext)
 
   const showToast = (message) => {
     Toast.show({
@@ -29,11 +31,12 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    if(username.length > 8 && password.length > 8){
+    if(username.length > 7 && password.length > 7){
         verifyUser(username, password, (result) => {
             if (result.success) {
                 console.log("User verified:", result.user)
-                navigation.navigate("BottomTabs")
+                loginUser(username)
+                navigation.navigate("Back")
             } else {
               showToast(result.error);
             }
@@ -44,9 +47,10 @@ const Login = () => {
   };
 
   const handleRegister = () => {
-    if(username.length > 8 && password.length > 8){
-        addUser(username, password)
-        navigation.navigate("Home")
+    if(username.length > 7 && password.length > 7){
+        addUser(username, password, email)
+        loginUser(username)
+        navigation.navigate("Back")
     } else {
         showToast('Incorrect length')
     }

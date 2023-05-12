@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
@@ -6,10 +7,9 @@ export default function Profile() {
   const handleLogout = () => {
     // Implement your logout logic here
   };
-
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
-      <Image source={{uri: '../assets/amazonLogo.jpeg'}} style={styles.logo} resizeMode="contain" />
 
       <TouchableOpacity style={styles.button} onPress={() => {
         // Handle 'Your Account' button press
@@ -18,13 +18,13 @@ export default function Profile() {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={() => {
-        // Handle 'Change Password' button press
+        navigation.navigate("ChangePassword")
       }}>
         <Text style={styles.buttonText}>Change Password</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={() => {
-        // Handle 'Manage Orders' button press
+        navigation.navigate("ManageOrder")
       }}>
         <Text style={styles.buttonText}>Manage Orders</Text>
       </TouchableOpacity>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   button: {
-    backgroundColor: '#FF9900',
+    backgroundColor: '#232F3E',
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 12,

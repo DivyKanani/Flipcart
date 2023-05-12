@@ -7,10 +7,10 @@ import Search from "./Screens/Search";
 import Payment from "./Screens/Payment";
 import Cart from "./Screens/Cart";
 import Profile from "./Screens/Profile";
-
+import { Ionicons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
-
 const BottomTabs = () => {
+    
     return (
         <Tab.Navigator 
             screenOptions = {{
@@ -31,7 +31,7 @@ const BottomTabs = () => {
                     left: 20,
                     right: 20,
                     elevation: 0,
-                    backgroundColor: "#ffffff",
+                    backgroundColor: "#232F3E",
                     borderRadius: 15,
                     height: 100,
                     ...styles.shadow
@@ -82,15 +82,7 @@ const BottomTabs = () => {
                 options = {{
                     tabBarIcon: ({focused}) => (
                         <View stlye={{alignItems: 'center', justifyContent: 'center', top: 10}} >
-                            <Image
-                                source={require('./assets/card.png')}
-                                resizeMode="center"
-                                style={{
-                                    width: 25,
-                                    height: 25,
-                                    tintColor: focused ? "#f4511e" : "#748c94",
-                                }}
-                            />
+                            <Ionicons name="card-outline" size={28} color= {focused ?"#f4511e":"#748c94"} />
                         </View>
                     )
                 }} 
@@ -101,15 +93,7 @@ const BottomTabs = () => {
                 options = {{
                     tabBarIcon: ({focused}) => (
                         <View stlye={{alignItems: 'center', justifyContent: 'center', top: 10}} >
-                            <Image
-                                source={require('./assets/cart.png')}
-                                resizeMode="contain"
-                                style={{
-                                    width: 25,
-                                    height: 25,
-                                    tintColor: focused ? "#f4511e" : "#748c94",
-                                }}
-                            />
+                            <Ionicons name="cart-outline" size={28} color= {focused ?"#f4511e":"#748c94"} />
                         </View>
                     )
                 }} 
@@ -117,6 +101,7 @@ const BottomTabs = () => {
             <Tab.Screen 
                 name="Profile" 
                 component={Profile}
+                headerShown = {true}
                 options = {{
                     tabBarIcon: ({focused}) => (
                         <View stlye={{alignItems: 'center', justifyContent: 'center', top: 10}} >
